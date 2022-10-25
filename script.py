@@ -15,7 +15,7 @@ apikey = args["apikey"]
 userkey = args["userkey"]
 
 response = requests.get('https://prettygr.im/anyminis/api', timeout=10)
-while response == "yes":
+while response != "yes":
     print('In Stock:', response.text)
     time.sleep(5.0)
     response = requests.get('https://prettygr.im/anyminis/api', timeout=10)
