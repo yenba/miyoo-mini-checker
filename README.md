@@ -2,6 +2,10 @@
 
 This is a python script that has been containerized into a Docker container to check for Miyoo Mini stock every 5 seconds. It will then send a push notification to Pushover to alert you of any new items.
 
+Thanks to user Dawning Anchors on the [Retro Game Handhelds Discord](https://discord.com/invite/p4uRmCd) server for putting together a site that checks for Miyoo Mini stock. This script is utilizing [that sites API page.](https://prettygr.im/anyminis/api)
+
+
+
 ## Prerequisites
 
 - **Pushover Account**
