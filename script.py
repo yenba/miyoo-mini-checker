@@ -17,29 +17,29 @@ args = vars(parser.parse_args())
 apikey = args["apikey"]
 userkey = args["userkey"]
 
-# Production Miyoo Mini Stuff
-# item_URL = "https://www.aliexpress.us/item/3256803425362523.html" # miyoo mini link
-# sleep_time_normal = 120
-# sleep_time_fast = 30
-# item_colors = ['RetroGrey', 'Transparent Black', 'Transparent Blue', 'White'] # colors
-# poMessage = ""
-# title = "Miyoo Mini In Stock!"
-# start_hour = 8 # set the start time for the fast refresh time check later
-# end_hour = 10 # set the end time for the fast refresh time check later
-# start = datetime.time(start_hour, 0, 0)
-# end = datetime.time(end_hour, 0, 0)
-
-# Dev Grinder Stuff
-item_URL = "https://www.aliexpress.us/item/2255800792609328.html" # grinder link
+#Production Miyoo Mini Stuff
+item_URL = "https://www.aliexpress.us/item/3256803425362523.html" # miyoo mini link
 sleep_time_normal = 120
 sleep_time_fast = 30
-item_colors = ['BLACK C2 GRINDER', 'RED C2 GRINDER', 'BLUE C2 GRINDER', 'WHITE C2 GRINDER'] # colors
+item_colors = ['RetroGrey', 'Transparent Black', 'Transparent Blue', 'White'] # colors
 poMessage = ""
-title = "Grinder In Stock!"
+title = "Miyoo Mini In Stock!"
 start_hour = 8 # set the start time for the fast refresh time check later
 end_hour = 10 # set the end time for the fast refresh time check later
 start = datetime.time(start_hour, 0, 0)
 end = datetime.time(end_hour, 0, 0)
+
+# Dev Test Item Stuff
+# item_URL = "https://www.aliexpress.us/item/2255800792609328.html" # grinder link
+# sleep_time_normal = 120
+# sleep_time_fast = 30
+# item_colors = ['BLACK C2 GRINDER', 'RED C2 GRINDER', 'BLUE C2 GRINDER', 'WHITE C2 GRINDER'] # colors
+# poMessage = ""
+# title = "Grinder In Stock!"
+# start_hour = 8 # set the start time for the fast refresh time check later
+# end_hour = 10 # set the end time for the fast refresh time check later
+# start = datetime.time(start_hour, 0, 0)
+# end = datetime.time(end_hour, 0, 0)
 
 # setup the class
 class AliItem():
