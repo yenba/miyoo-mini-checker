@@ -61,6 +61,7 @@ class AliItem():
         self.playwright.stop()
 
     def load(self):
+        self.page.set_default_timeout(timeout = 120000)  # in milliseconds
         self.page.goto(self.url)
         self.page.wait_for_load_state('networkidle')
 
