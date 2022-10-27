@@ -1,4 +1,4 @@
-FROM python:3
+FROM mcr.microsoft.com/playwright/python:latest
 #Setup the variables
 ENV APIKEY="APIKEYHERE"
 ENV USERKEY="USERKEYHERE"
