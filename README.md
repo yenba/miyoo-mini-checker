@@ -20,7 +20,9 @@ This is a python script that has been containerized into a Docker container to c
 
 Run your docker command like this:
 
-`docker run -d --name=miyoo-mini-checker --env "APIKEY=PUSHOVER-API-KEY-HERE" --env "USERKEY=PUSHOVER-USER-KEY-HERE" yenba/miyoo-mini-checker`
+```docker 
+docker run -d --name=miyoo-mini-checker --env "PYTHONUNBUFFERED=1" --env "APIKEY=PUSHOVER-API-KEY-HERE" --env "USERKEY=PUSHOVER-USER-KEY-HERE" yenba/miyoo-mini-checker
+```
 
 # **Docker Compose Command**
 
@@ -35,4 +37,5 @@ services:
     environment:
       - APIKEY=PUSHOVER_API_KEY_HERE
       - USERKEY=PUSHOVER_USER_KEY_HERE
+      - PYTHONUNBUFFERED=1
 ```
