@@ -1,10 +1,6 @@
 # Miyoo Mini Pushover Notifier
 
-This is a python script that has been containerized into a Docker container to check for Miyoo Mini stock every 5 seconds. It will then send a push notification to Pushover to alert you of any new items.
-
-Thanks to user Dawning Anchors on the [Retro Game Handhelds Discord](https://discord.com/invite/p4uRmCd) server for putting together a site that checks for Miyoo Mini stock. This script is utilizing [that sites API page.](https://prettygr.im/anyminis/api)
-
-
+This is a python script that has been containerized into a Docker container to check for Miyoo Mini stock every 30 seconds. It will then send a push notification to Pushover to alert you of any new items as well as how much of each Miyoo is in stock.
 
 ## Prerequisites
 
@@ -17,10 +13,26 @@ Thanks to user Dawning Anchors on the [Retro Game Handhelds Discord](https://dis
 - **Docker**
 
 ## Docker Hub Repo
+
 [https://hub.docker.com/repository/docker/yenba/miyoo-mini-checker](https://hub.docker.com/repository/docker/yenba/miyoo-mini-checker)
 
-# ****Docker Run Command****
+# **Docker Run Command**
 
 Run your docker command like this:
 
-`docker run -it --rm --env "APIKEY=PUSHOVER-API-KEY-HERE" --env "USERKEY=PUSHOVER-USER-KEY-HERE" yenba/miyoo-mini-checker`
+`docker run -d --name=miyoo-mini-checker --env "APIKEY=PUSHOVER-API-KEY-HERE" --env "USERKEY=PUSHOVER-USER-KEY-HERE" yenba/miyoo-mini-checker`
+
+# **Docker Compose Command**
+
+Add this to your docker-compose.yml file:
+
+```docker
+version: "3.3"
+services:
+  miyoo-mini-checker:
+    image: yenba/miyoo-mini-checker
+    container_name: miyoo-mini-checker
+    environment:
+      - APIKEY=PUSHOVER_API_KEY_HERE
+      - USERKEY=PUSHOVER_USER_KEY_HERE
+```
