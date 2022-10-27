@@ -1,5 +1,6 @@
 # import the things you need to run the script
 import time
+import sys
 import datetime
 from playwright.sync_api import Playwright, sync_playwright, expect
 import argparse
@@ -105,6 +106,7 @@ while True:
     if aliItem.check_available():
         # check for stock counts
         StockListMessage = aliItem.check_stock_custom()
+        print(StockListMessage, file=sys.stderr)
         print(StockListMessage)
 
         # send pushover
@@ -112,7 +114,7 @@ while True:
         url = item_URL
         sendPushover(apikey, userkey, poMessage, title, url)
     else:
-        print("Not In Stock:",datetime.datetime.utcnow().replace(microsecond = 0))
+        print("Not In Stock:",datetime.datetime.utcnow().replace(microsecond = 0), file=sys.stderr)
 
     current = datetime.datetime.utcnow().time()
 
