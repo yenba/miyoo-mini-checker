@@ -28,7 +28,7 @@ end = datetime.time(end_hour, 0, 0)
 async def sendNotification(title, body, url):   
     pusher = apprise.Apprise()
     config = apprise.AppriseConfig()
-    config.add('./config/*.yml')
+    config.add('./config/config.yml')
     pusher.add(config) 
     
     notify = await pusher.async_notify(
