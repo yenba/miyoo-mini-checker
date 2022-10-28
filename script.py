@@ -2,45 +2,41 @@
 import time
 import sys
 import datetime
-from playwright.sync_api import Playwright, sync_playwright, expect
-import argparse
+import apprise
+import asyncio
+import nest_asyncio
 from prettytable import PrettyTable
-from pushoverSend import sendPushover
+from prettytable import SINGLE_BORDER
+from apprise import NotifyFormat
+from playwright.sync_api import sync_playwright
 
-# setup the argument parser
-parser = argparse.ArgumentParser(description="This is how you pass Pushover API keys into the script!",
-                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument("--apikey", help="Pushover API Key")
-parser.add_argument("--userkey", help="Pushover User Key")
-args = vars(parser.parse_args())
+# setup nesting of asyncio
+nest_asyncio.apply()
 
-# Set up parameters
-apikey = args["apikey"]
-userkey = args["userkey"]
-
-#Production Miyoo Mini Stuff
+# Production Miyoo Mini Stuff
 item_URL = "https://www.aliexpress.us/item/3256803425362523.html" # miyoo mini link
 sleep_time_normal = 120
 sleep_time_fast = 30
 item_colors = ['RetroGrey', 'Transparent Black', 'Transparent Blue', 'White'] # colors
-poMessage = ""
 title = "Miyoo Mini In Stock!"
 start_hour = 8 # set the start time for the fast refresh time check later
 end_hour = 10 # set the end time for the fast refresh time check later
 start = datetime.time(start_hour, 0, 0)
 end = datetime.time(end_hour, 0, 0)
 
-# Dev Test Item Stuff
-# item_URL = "https://www.aliexpress.us/item/2255800792609328.html" # grinder link
-# sleep_time_normal = 120
-# sleep_time_fast = 30
-# item_colors = ['BLACK C2 GRINDER', 'RED C2 GRINDER', 'BLUE C2 GRINDER', 'WHITE C2 GRINDER'] # colors
-# poMessage = ""
-# title = "Grinder In Stock!"
-# start_hour = 8 # set the start time for the fast refresh time check later
-# end_hour = 10 # set the end time for the fast refresh time check later
-# start = datetime.time(start_hour, 0, 0)
-# end = datetime.time(end_hour, 0, 0)
+# setup apprise
+async def sendNotification(title, body, url):   
+    pusher = apprise.Apprise()
+    config = apprise.AppriseConfig()
+    config.add('./config.yml')
+    pusher.add(config) 
+    
+    notify = await pusher.async_notify(
+        body=body,
+        title=title,
+        body_format=NotifyFormat.TEXT,
+    )
+    return notify
 
 # setup the class
 class AliItem():
@@ -93,26 +89,31 @@ class AliItem():
             stock = int(''.join(i for i in txt if i.isdigit())) # convert it to an int
             Table.add_row([color, stock]) # add as a new row to the table
         Table.align = "l" # left align the table
+        Table.set_style(SINGLE_BORDER)
         return Table 
 
 ######################
 ### RUN THE SCRIPT ###
 ######################
 
+print("")
+print("Starting the script!")
+print("")
+
 aliItem = AliItem()
 
 while True:
-    print()
     if aliItem.check_available():
         # check for stock counts
         StockListMessage = aliItem.check_stock_custom()
         print(StockListMessage, file=sys.stderr)
-        print(StockListMessage)
 
-        # send pushover
-        poMessage = StockListMessage
+        # send apprise
+        table_txt = StockListMessage.get_string()
+        body = f"```{table_txt}```"
         url = item_URL
-        sendPushover(apikey, userkey, poMessage, title, url)
+        push = asyncio.run(sendNotification(title, body, url))
+
     else:
         print("Not In Stock:",datetime.datetime.utcnow().replace(microsecond = 0), file=sys.stderr)
 

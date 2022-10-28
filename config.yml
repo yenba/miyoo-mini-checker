@@ -1,0 +1,7 @@
+#
+# Global Tag Configuration Example
+#
+
+# Define your URLs (Mandatory!)
+urls:
+  - discord://{WebhookID}/{WebhookToken}/
