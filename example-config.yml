@@ -1,0 +1,9 @@
+# Global Tag Configuration Example
+
+##############################################
+# MAKE SURE THIS FILE IS CALLED "config.yml" #
+##############################################
+
+# Define your URLs (Mandatory!)
+urls:
+  - discord://{WebhookID}/{WebhookToken}/
