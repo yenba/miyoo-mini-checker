@@ -12,17 +12,7 @@ This is a python script that has been containerized into a Docker container to c
 
 ## **Docker Compose Command**
 
-Add this to your docker-compose.yml file:
-
-```
-version: "3.3"
-services:
-  miyoo-mini-checker:
-    image: yenba/miyoo-mini-checker
-    container_name: miyoo-mini-checker
-    environment:
-      - PYTHONUNBUFFERED=1
-```
+Use the docker-compose.yml file in this repo to run the docker container.
 
 ## Instructions
 
