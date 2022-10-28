@@ -1,4 +1,4 @@
-# Miyoo Mini Pushover Notifier
+# Miyoo Mini Stock Notifier
 
 This is a python script that has been containerized into a Docker container to check for Miyoo Mini stock every 30 seconds. It will then send a push notification to Pushover to alert you of any new items as well as how much of each Miyoo is in stock.
 
